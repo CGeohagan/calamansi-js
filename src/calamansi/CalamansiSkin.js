@@ -13,7 +13,8 @@ class CalamansiSkin
 
     async init() {
         // Load and apply the skin
-        this.content = await this.load();
+        // CBG removing where we load skin
+        // this.content = await this.load();
 
         // Set UI elements
         this.setUiElements();

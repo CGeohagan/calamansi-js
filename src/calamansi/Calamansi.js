@@ -1,6 +1,7 @@
 import CalamansiAudio from './CalamansiAudio';
 import CalamansiSkin from './CalamansiSkin';
-import TrackInfoReader from './services/TrackInfoReader';
+// CBG commenting out
+// import TrackInfoReader from './services/TrackInfoReader';
 
 class Calamansi
 {
@@ -30,7 +31,8 @@ class Calamansi
         /* STATE */
         this._initialized = false;
 
-        this._trackInfoReader = new TrackInfoReader(this._options.soundcloudClientId);
+        // CBG commenting out
+        // this._trackInfoReader = new TrackInfoReader(this._options.soundcloudClientId);
 
         this.el = el;
         this.id = el.id ? el.id : this._generateUniqueId();
@@ -298,17 +300,18 @@ class Calamansi
             return;
         }
 
-        this._trackInfoReader.read(track)
-            .then(trackInfo => {
-                if (!trackInfo._loaded) {
-                    return;
-                }
+        // CBG commenting out
+        // this._trackInfoReader.read(track)
+        //     .then(trackInfo => {
+        //         if (!trackInfo._loaded) {
+        //             return;
+        //         }
 
-                track.info = Object.assign(track.info, trackInfo);
+        //         track.info = Object.assign(track.info, trackInfo);
 
-                this._emit('trackInfoReady', this, track);
-                CalamansiEvents._emit('trackInfoReady', this);
-            });
+        //         this._emit('trackInfoReady', this, track);
+        //         CalamansiEvents._emit('trackInfoReady', this);
+        //     });
     }
 
     /**
@@ -479,7 +482,7 @@ class Calamansi
                 return;
             }
 
-            el.dataset.display = el.style.display ? el.style.display : 'inline';
+            el.dataset.display = el.style.display ? el.style.display : 'flex';
             el.style.display = 'none';
         });
 

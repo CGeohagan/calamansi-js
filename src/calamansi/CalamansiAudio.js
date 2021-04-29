@@ -59,8 +59,8 @@ class CalamansiAudio
         this.audio.addEventListener('ended', (event) => {
             this._setCurrentTime(0);
 
-            this._calamansi._emit('trackEnded', this._calamansi);
             CalamansiEvents._emit('trackEnded', this._calamansi);
+            this._calamansi._emit('trackEnded', this._calamansi);
         });
     }
 
@@ -155,9 +155,16 @@ class CalamansiAudio
      * @param int time (seconds)
      */
     seekTo(time) {
-        this.audio.currentTime = time;
+        var currentTime = this.audio.currentTime;
+        var updatedTime = currentTime + time;
+        if (updatedTime < 0) {
+            updatedTime = 0;
+        } else if (updatedTime > this.audio.duration) {
+            updatedTime = this.audio.duration;
+        }
 
-        this._setCurrentTime(time);
+        this.audio.currentTime = updatedTime;
+        this._setCurrentTime(updatedTime);
     }
 
     /**
